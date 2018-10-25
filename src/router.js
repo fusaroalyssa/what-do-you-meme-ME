@@ -26,5 +26,6 @@ export default new Router({
       name: 'play',
       component: () => import(/* webpackChunkName: "game" */ './views/Game.vue')
     }
+
   ]
 })
