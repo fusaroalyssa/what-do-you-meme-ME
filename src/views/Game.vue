@@ -10,7 +10,24 @@
                 <div class="card-body">
                     <h5 class="card-title">Players</h5>
                     <ul class="list-group list-group-flush">
-                        <li v-for="c in myPlayers" class="list-group-item">{{c}}</li>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Name
+                            </div>
+                            <div class="col-md-6">
+                                Score
+                            </div>
+                        </div>
+                        <li v-for="p in state.players" class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{p.name}}
+                                </div>
+                                <div class="col-md-6">
+                                    {{p.score}}
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -48,7 +65,7 @@
 </style>
 
 <script>
-import { GetState, FlipPicture, GetMyCaptions, GetPlayers } from '@/services/api_access';
+import { GetState, FlipPicture, GetMyCaptions } from '@/services/api_access';
 
 export default {
     data: function(){
@@ -62,19 +79,12 @@ export default {
         }
     },
     created: function(){
-        GetState()
-        .then(x=> this.state = x);
         GetMyCaptions()
         .then(x=> this.myCaptions = x);
-        GetPlayers()
-        .then(x=> this.myPlayers = x);
-    },
-    /*created: function(){
         GetState()
         .then(x=> this.state = x);
-        GetPlayers()
-        .then(x=> this.myPlayers = x);
-    },*/
+        
+    },
     methods: {
         flipPicture: function(){
             FlipPicture()
