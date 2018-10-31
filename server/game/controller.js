@@ -13,6 +13,10 @@ app.get("/captions/:id", function(req, res){
     res.send(game.players[req.params.id].captions());
 })
 
+app.get("/players/:id", function(req, res){
+    res.send(game.players[req.params.id].getName());
+})
+
 app.post('/players', (req, res) => {
     const player = new Player(req.body.name, game.players.length);
     game.players.push(player);

@@ -56,6 +56,10 @@ class Player{
 
 
     }
+    getName()
+    {
+        return this.name
+    }
 }
 
 module.exports = {
