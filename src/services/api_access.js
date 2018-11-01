@@ -1,12 +1,15 @@
 const api_root = "http://localhost:80/game";
-let playerId = 0;
+export let playerId = null;
 
 export function GetState(){
     return myFetch(api_root + "/");
 }
 export function GetMyCaptions(){
-    return myFetch(api_root + `/players`, {name: "Alyssa"})
-     .then(x=> myFetch(api_root + `/captions/${playerId}`));
+    return myFetch(api_root + `/captions/${playerId}`);
+}
+export function Login(name){
+    return myFetch(api_root + `/players`, { name: name })
+        .then(x=> playerId = x.id);
 }
 export function FlipPicture(){
     return myFetch(api_root + "/picture", {})
