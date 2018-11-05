@@ -30,7 +30,7 @@ app.post('/picture', (req, res) => {
 app.post('/playedCaptions', (req, res) => {
     var playerId = req.header("playerId");
     let newCard = game.submitCaption(playerId, req.body.text )
-    res.send(newCard);
+    res.send([ newCard ]);
 })
 app.post('/playedCaptions/choose', (req, res) => {
     var playerId = req.header("playerId");

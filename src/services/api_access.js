@@ -14,8 +14,12 @@ export function Login(name){
 export function FlipPicture(){
     return myFetch(api_root + "/picture", {})
 }
-
-
+export function SubmitCaption(c){
+    return myFetch(api_root + "/playedCaptions", {text: c})
+}
+export function ChooseCaption(c){
+    return myFetch(api_root + "/playedCaptions/choose", {text: c.text})
+}
 
 
 
@@ -24,12 +28,17 @@ export function FlipPicture(){
       let options = {
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             credentials: "same-origin", // include, same-origin, *omit
+            headers: {
+            //JSON name  : variable name
+                playerId: playerId
+            }
       };
       if(data){
           options = { 
             ...options,
             method:  "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
+                ...options.headers, 
                 "Content-Type": "application/json; charset=utf-8",
                 // "Content-Type": "application/x-www-form-urlencoded",
             },
