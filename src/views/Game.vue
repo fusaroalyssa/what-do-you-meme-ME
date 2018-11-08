@@ -80,6 +80,7 @@
 
 <script>
 import * as api from '@/services/api_access';
+let loopTimer = null;
 
 export default {
     data(){
@@ -94,7 +95,8 @@ export default {
         }
     },
     created: function(){
-        this.refresh()        
+        this.refresh() 
+        loopTimer = setInterval(this.refresh, 1000)
     },
     methods: {
         refresh(){
@@ -103,13 +105,11 @@ export default {
         },
         flipPicture(){
             api.FlipPicture()
-            .then(()=> this.refresh())
             
         }, 
         login(){
             api.Login(prompt('What is your name?'))
             .then (()=> api.GetMyCaptions().then(x=> this.myCaptions = x))
-            .then(()=> this.refresh())
         },   
         submitCaption(c){
             api.SubmitCaption(c)
@@ -117,11 +117,9 @@ export default {
                 this.myCaptions.splice(this.myCaptions.indexOf(c),1);
                 this.myCaptions.push(x[0]);
             })
-            .then(()=> this.refresh())
         },
         chooseCaption(c){
             api.ChooseCaption(c)
-            .then(()=> this.refresh())
             
         }, 
 
