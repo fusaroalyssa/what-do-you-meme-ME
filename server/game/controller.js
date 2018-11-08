@@ -38,4 +38,5 @@ app.post('/playedCaptions/choose', (req, res) => {
     res.send(req.body.text);
 })
 
+
 module.exports = app;

@@ -27,6 +27,7 @@ class Game {
     flipPicture(playerId){
         if(!this.isDealer(playerId)) { throw new Error("Only the dealer can flip a picture")}
         this.picture = pictures[(iPicture++) % pictures.length];
+        this.playedCaptions = [];
     }
     submitCaption(playerId, text){
         if(this.isDealer(playerId)) { throw new Error("The dealer cannot submit a caption")}

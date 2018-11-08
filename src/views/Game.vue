@@ -11,12 +11,16 @@
                     <h5 class="card-hearder">
                         Players
                         <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: playerId() !== null}">+</a>
+                        <span v-if="playerId() !== null"> (Welcome {{state.players[playerId()].name}}) </span>
                     </h5>
                     <ul class="list-group list-group-flush">
                         <li  v-for="p in state.players" :key="p.id"
                             class="list-group-item">
                             <img/>
                             <h5>{{p.name}}</h5>
+                            <span v-if ="p.id == state.dealerId" class="badge badge-success">
+                                Dealer
+                                </span> &nbsp;
                             <span class="badge badge-primary badge-pill">{{p.score}}</span>
                         </li>
                     </ul>
@@ -45,13 +49,14 @@
                 <h5 class="card-header">Played Captions</h5>
                 <ul class="list-group list-group-flush">
                     <li v-for="c in state.playedCaptions" :key="c.text"
-                        class="list-group-item">
+                        class="list-group-item" :class="{ 'list-group-item-warning':c.isChosen }">
                         {{c.text }}
-                        <div>
                             <a  v-if="isDealer"
                                 @click.prevent="chooseCaption(c)"
                                 class="btn btn-primary btn-sm">Choose</a>
-                        </div>
+                        <span class="badge" :class="c.playerName ? 'badge-success': 'badge-secondary'">
+                            {{c.playerName || 'Hidden'}} 
+                        </span>
                     </li>
                 </ul>
                 </div>
@@ -64,8 +69,9 @@
 <style lang="scss">
     li.list-group-item {
         display: flex;
-        align-content: center;
+        align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
         img{
             width: 30px; height: 30px;
             margin-right: 5px;
