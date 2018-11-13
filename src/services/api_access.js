@@ -7,8 +7,8 @@ export function GetState(){
 export function GetMyCaptions(){
     return myFetch(api_root + `/captions/${playerId}`);
 }
-export function Login(name){
-    return myFetch(api_root + `/players`, { name: name })
+export function Login(name, fbid, access_token){
+    return myFetch(api_root + `/players`, { name, fbid, access_token})
         .then(x=> playerId = x.id);
 }
 export function FlipPicture(){

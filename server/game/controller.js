@@ -18,8 +18,7 @@ app.get("/players/:id", function(req, res){
 })*/
 
 app.post('/players', (req, res) => {
-    const player = new Player(req.body.name, game.players.length);
-    game.players.push(player);
+    const player = game.login(req.body.name, req.body.fbid, req.body.access_token)
     res.send(player);
 })
 app.post('/picture', (req, res) => {
