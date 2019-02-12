@@ -19,7 +19,4 @@ npm run build
 ```
 npm run lint
 ```
-to run
-npm run serve
-npm run build 
-localhost:8080
+to veiw - localhost:8080
